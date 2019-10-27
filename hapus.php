@@ -21,7 +21,7 @@ if (hapus($id) > 0){
 } else {
 	echo "
 		<script>
-			alert ('data gagal dihapus');
+			alert ('data gagal dihapus coba lagi');
 			document.location.href = 'index.php';
 		</script>
 
