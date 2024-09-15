@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Nilai Mahasiswa</title>
+</head>
+<body>
+	<h1>Form Nilai Mahasiswa</h1> 
+	<label >NIM</label><br>
+    <input type="text" id="nim" placeholder="Masukkan NIM"><br>
+    <label >Nama</label><br>
+    <input type="text" id="nama" placeholder="Masukkan Nama"><br>
+    <label >Tugas 1</label><br>
+    <input type="number" id="tugas1" placeholder="Masukkan  NIlaiTugas1"><br>
+    <label >Tugas 2</label><br>
+    <input type="number" id="tugas2" placeholder="Masukkan nilai Tugas2"><br>
+    <label >UTS</label><br>
+    <input type="number" id="uts" placeholder="Masukkan Nilai Uts"><br>
+    <label >UAS</label><br>
+    <input type="number" id="uas" placeholder="Masukkan Nilai Uas"><br>
+    <button onclick="tambah()">Tambah</button>
+    <!-- <button onclick="ubah()">Ubah</button> -->
+    <button onclick="hapus()">Hapus</button><hr>
+    <table id="table" border="2" cellspacing="0">
+        <tr>
+            <td>NIM</td>
+            <td>Nama</td>
+            <td>Tugas 1</td>
+            <td>Tugas 2</td>
+            <td>UTS</td>
+            <td>UAS</td>
+            <td>Rata-Rata</td>
+            <td>Status</td>
+        </tr>
+    </table>
+    <script>
+    	var status, rIndex,
+			table = document.getElementById("table");
+    	function cekInputan(){
+    		var isEmpty = false;
+				nama = document.getElementById("nama").value,
+				nim = document.getElementById("nim").value,
+				tugas1 = document.getElementById("tugas1").value,
+				tugas2 = document.getElementById("tugas2").value,
+				uts = document.getElementById("uts").value,
+				uas = document.getElementById("uas").value;
+			if (nama === "") {alert("nama tidak diisi"); isEmpty = true;}
+			if (nim === "") {alert("nim tidak diisi"); isEmpty = true;}	
+			if (tugas1 === "") {alert("nilai tugas1 tidak diisi"); isEmpty = true;}
+			if (tugas2 === "") {alert("nilai tugas2 tidak diisi"); isEmpty = true;}
+			if (uts === "") {alert("nilai uts tidak diisi"); isEmpty = true;}	
+			if (uas === "") {alert("nilai uas tidak diisi"); isEmpty = true;}
+			return isEmpty;	
+    	} 
+
+        function tambah() {
+        	if (!cekInputan()) {
+	        	var nim = document.getElementById("nim").value; 
+	            var nama = document.getElementById("nama").value;
+	            var tugas1 = parseFloat(document.getElementById("tugas1").value); 
+	            var tugas2 = parseFloat(document.getElementById("tugas2").value); 
+	            var uts = parseFloat(document.getElementById("uts").value); 
+	            var uas = parseFloat(document.getElementById("uas").value);
+	            var rataRata = (tugas1+tugas2+uts+uas)/4;
+
+	            if(rataRata >= 80 && rataRata <=100){
+	                status = "A";
+	            }else if(rataRata >=70 && rataRata <=79.9){
+	                status = "B";
+	            }else{
+	                status = "C";
+	            }
+	            var row = table.insertRow(1);
+	            var cell1 = row.insertCell(0);
+	            var cell2 = row.insertCell(1);
+	            var cell3 = row.insertCell(2);
+	            var cell4 = row.insertCell(3);
+	            var cell5 = row.insertCell(4);
+	            var cell6 = row.insertCell(5);
+	            var cell7 = row.insertCell(6);
+	            var cell8 = row.insertCell(7);
+	            cell1.innerHTML = nim;
+	            cell2.innerHTML = nama;
+	            cell3.innerHTML = tugas1;
+	            cell4.innerHTML = tugas2;
+	            cell5.innerHTML = uts;
+	            cell6.innerHTML = uas;
+	            cell7.innerHTML = rataRata;
+	            cell8.innerHTML = status;
+	            clear();
+	            seleksi();
+	        }
+    	}
+    	function clear(){
+			document.getElementById("nim").value = "",
+			document.getElementById("nama").value = "",
+			document.getElementById("tugas1").value = "",
+			document.getElementById("tugas2").value = "",
+			document.getElementById("uts").value = "",
+			document.getElementById("uas").value = "";
+		}
+		function seleksi(){
+			for(var i = 1; i < table.rows.length; i++){
+				table.rows[i].onclick = function(){
+					rIndex = this.rowIndex;
+					document.getElementById("nim").value = this.cells[0].innerHTML;
+					document.getElementById("nama").value = this.cells[1].innerHTML;
+					document.getElementById("tugas1").value = this.cells[2].innerHTML;
+					document.getElementById("tugas2").value = this.cells[2].innerHTML;
+					document.getElementById("uts").value = this.cells[2].innerHTML;
+					document.getElementById("uas").value = this.cells[2].innerHTML;
+				}
+			}
+		}
+		// function ubah(){
+		// 	var nama = document.getElementById("nim").value,
+		// 		umur = document.getElementById("nama").value,
+		// 		tugas1 = document.getElementById("tugas1").value,
+		// 		tugas2 = document.getElementById("tugas2").value,
+		// 		uts = document.getElementById("uts").value,
+		// 		uas = document.getElementById("uas").value;
+		// 	table.rows[rIndex].cells[0].innerHTML = nim;
+		// 	table.rows[rIndex].cells[1].innerHTML = nama;
+		// 	table.rows[rIndex].cells[2].innerHTML = tugas1,
+		// 	table.rows[rIndex].cells[3].innerHTML = tugas2,
+		// 	table.rows[rIndex].cells[4].innerHTML = uts,
+		// 	table.rows[rIndex].cells[5].innerHTML = uas;
+		// 	clear();
+		// }
+		function hapus(){
+			table.deleteRow(rIndex);
+			clear();
+		}
+    </script>
+</body>
+</html>

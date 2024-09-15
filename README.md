@@ -1,1 +1,1 @@
-# hacktoberfest oktober 2019
+# hacktoberfest oktober
